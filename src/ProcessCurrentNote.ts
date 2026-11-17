@@ -1,3 +1,4 @@
+import { t } from "./i18n";
 /* eslint-disable obsidianmd/ui/sentence-case */
 // ProcessCurrentNote.ts
 import {
@@ -63,11 +64,11 @@ export class ProcessCurrentNote extends Modal {
 			cls: "modal-header",
 		});
 		headerContainer.createEl("h2", {
-			text: "Convert, compress and resize",
+			text: t("Convert, compress and resize"),
 		});
 
 		headerContainer.createEl("h6", {
-			text: `all images in: ${this.activeFile.basename}.${this.activeFile.extension}`,
+			text: t("all images in: {p0}.{p1}", { p0: this.activeFile.basename, p1: this.activeFile.extension }),
 			cls: "modal-subtitle",
 		});
 
@@ -79,24 +80,24 @@ export class ProcessCurrentNote extends Modal {
 			cls: "image-counts-display",
 		});
 
-		countsDisplay.createEl("span", { text: "Total images found: " });
+		countsDisplay.createEl("span", { text: t("Total images found: ") });
 		this.imageCountDisplay = countsDisplay.createEl("span");
 
 		countsDisplay.createEl("br");
 
-		countsDisplay.createEl("span", { text: "To be processed: " });
+		countsDisplay.createEl("span", { text: t("To be processed: ") });
 		this.processedCountDisplay = countsDisplay.createEl("span");
 
 		countsDisplay.createEl("br");
 
-		countsDisplay.createEl("span", { text: "Skipped: " });
+		countsDisplay.createEl("span", { text: t("Skipped: ") });
 		this.skippedCountDisplay = countsDisplay.createEl("span");
 
 		// Warning message
 		headerContainer.createEl("p", {
 			cls: "modal-warning",
 			 
-			text: "⚠️ This will modify all images in the current note — please ensure you have backups.",
+			text: t("⚠️ This will modify all images in the current note — please ensure you have backups."),
 		});
 
 		// --- Settings Container ---
@@ -111,10 +112,10 @@ export class ProcessCurrentNote extends Modal {
 
 		// Convert To setting
 		this.convertToSetting = new Setting(formatQualityContainer)
-			.setName("Convert to ⓘ ")
-			.setDesc("Choose output format for your images")
+			.setName(t("Convert to ⓘ "))
+			.setDesc(t("Choose output format for your images"))
 			.setTooltip(
-				"Same as original: preserves current format while applying compression/resizing",
+				t("Same as original: preserves current format while applying compression/resizing"),
 			)
 			.addDropdown((dropdown) =>
 				dropdown
@@ -135,14 +136,14 @@ export class ProcessCurrentNote extends Modal {
 
 		// Quality setting
 		new Setting(formatQualityContainer)
-			.setName("Quality ⓘ")
-			.setDesc("Compression level (0-100)")
+			.setName(t("Quality ⓘ"))
+			.setDesc(t("Compression level (0-100)"))
 			.setTooltip(
-				"100: no compression (original quality)\n75: recommended (good balance)\n0-50: high compression (lower quality)",
+				t("100: no compression (original quality)\n75: recommended (good balance)\n0-50: high compression (lower quality)"),
 			)
 			.addText((text) =>
 				text
-					.setPlaceholder("Enter quality (0-100)")
+					.setPlaceholder(t("Enter quality (0-100)"))
 					.setValue(
 						(
 							this.plugin.settings.ProcessCurrentNotequality * 100
@@ -169,13 +170,13 @@ export class ProcessCurrentNote extends Modal {
 
 		// Resize Mode setting
 		this.resizeModeSetting = new Setting(resizeContainer)
-			.setName("Resize mode ⓘ")
+			.setName(t("Resize mode ⓘ"))
 			.setDesc(
-				"Choose how images should be resized - results are permanent.",
+				t("Choose how images should be resized - results are permanent."),
 			)
 			 
 			.setTooltip(
-				"Fit: maintains aspect ratio within dimensions\nFill: exactly matches dimensions\nLongest edge: limits the longest side\nShortest edge: limits the shortest side\nWidth/height: constrains single dimension",
+				t("Fit: maintains aspect ratio within dimensions\nFill: exactly matches dimensions\nLongest edge: limits the longest side\nShortest edge: limits the shortest side\nWidth/height: constrains single dimension"),
 			)
 			.addDropdown((dropdown) =>
 				dropdown
@@ -216,14 +217,14 @@ export class ProcessCurrentNote extends Modal {
 
 		// Skip formats setting
 		this.skipFormatsSetting = new Setting(skipContainer)
-			.setName("Skip file formats ⓘ")
+			.setName(t("Skip file formats ⓘ"))
 			.setTooltip(
-				"Comma-separated list of file formats to skip (e.g., tif,tiff,heic). Leave empty to process all formats.",
+				t("Comma-separated list of file formats to skip (e.g., tif,tiff,heic). Leave empty to process all formats."),
 			)
 			.addText((text) =>
 				text
 					 
-					.setPlaceholder("e.g., tif, tiff, heic")
+					.setPlaceholder(t("e.g., tif, tiff, heic"))
 					.setValue(
 						this.plugin.settings.ProcessCurrentNoteSkipFormats,
 					)
@@ -238,12 +239,12 @@ export class ProcessCurrentNote extends Modal {
 		// Ignore folders setting
 		new Setting(skipContainer)
 			.setClass("image-converter-ignore-folders-setting")
-			.setName("Skip folders ⓘ")
+			.setName(t("Skip folders ⓘ"))
 			.setTooltip(
-				"Comma-separated folder patterns to exclude images from processing.",
+				t("Comma-separated folder patterns to exclude images from processing."),
 			)
 			.addText((text) => {
-				text.setPlaceholder("e.g., _attachments, images/**")
+				text.setPlaceholder(t("e.g., _attachments, images/**"))
 					.setValue(
 						this.plugin.settings.ProcessCurrentNoteIgnoreFolders,
 					)
@@ -263,7 +264,7 @@ export class ProcessCurrentNote extends Modal {
 			cls: "image-converter-ignore-folders-help",
 		});
 		helpDetails.createEl("summary", {
-			text: "Show examples and how matching works",
+			text: t("Show examples and how matching works"),
 			cls: "image-converter-ignore-folders-help-summary",
 		});
 
@@ -272,30 +273,30 @@ export class ProcessCurrentNote extends Modal {
 		});
 
 		helpContent.createDiv({
-			text: "How matching works:",
+			text: t("How matching works:"),
 			attr: { style: "font-weight: bold; margin: 8px 0 4px 0;" },
 		});
 		const behaviorList = helpContent.createEl("ul", {
 			attr: { style: "margin: 4px 0; padding-left: 20px;" },
 		});
 		behaviorList.createEl("li", {
-			text: "Folder paths without wildcards skip that folder and all subfolders",
+			text: t("Folder paths without wildcards skip that folder and all subfolders"),
 		});
 		behaviorList.createEl("li", {
-			text: "Leading / is optional",
+			text: t("Leading / is optional"),
 		});
 		behaviorList.createEl("li", {
-			text: "Use * to match only direct children",
+			text: t("Use * to match only direct children"),
 		});
 		behaviorList.createEl("li", {
-			text: "Use ** to include subfolders too",
+			text: t("Use ** to include subfolders too"),
 		});
 		behaviorList.createEl("li", {
-			text: "Regex is supported for advanced patterns",
+			text: t("Regex is supported for advanced patterns"),
 		});
 
 		helpContent.createDiv({
-			text: "Examples:",
+			text: t("Examples:"),
 			attr: { style: "font-weight: bold; margin-bottom: 4px;" },
 		});
 
@@ -303,26 +304,26 @@ export class ProcessCurrentNote extends Modal {
 			attr: { style: "margin: 4px 0 8px 0; padding-left: 20px;" },
 		});
 		examplesList.createEl("li", {
-			text: "_attachments → Skips that folder and everything inside it",
+			text: t("_attachments → Skips that folder and everything inside it"),
 		});
 		examplesList.createEl("li", {
-			text: "/_attachments → Same as above",
+			text: t("/_attachments → Same as above"),
 		});
 		examplesList.createEl("li", {
-			text: "_attachments/* → Skips only direct children in that folder",
+			text: t("_attachments/* → Skips only direct children in that folder"),
 		});
 		examplesList.createEl("li", {
-			text: "_attachments/** → Skips that folder and all nested subfolders",
+			text: t("_attachments/** → Skips that folder and all nested subfolders"),
 		});
 		examplesList.createEl("li", {
-			text: "images/**, assets/** → Skips multiple folder trees",
+			text: t("images/**, assets/** → Skips multiple folder trees"),
 		});
 		examplesList.createEl("li", {
-			text: "archive/2025/** → Skips a specific folder tree",
+			text: t("archive/2025/** → Skips a specific folder tree"),
 		});
 
 		helpContent.createDiv({
-			text: "Advanced (regex):",
+			text: t("Advanced (regex):"),
 			attr: { style: "font-weight: bold; margin-bottom: 4px;" },
 		});
 
@@ -330,20 +331,20 @@ export class ProcessCurrentNote extends Modal {
 			attr: { style: "margin: 4px 0 8px 0; padding-left: 20px;" },
 		});
 		advancedExamplesList.createEl("li", {
-			text: "/^_attachments\\// → Skips paths starting with _attachments/",
+			text: t("/^_attachments\\// → Skips paths starting with _attachments/"),
 		});
 		advancedExamplesList.createEl("li", {
-			text: "regex:^media/(raw|temp)/ → Skips media/raw and media/temp",
+			text: t("regex:^media/(raw|temp)/ → Skips media/raw and media/temp"),
 		});
 		advancedExamplesList.createEl("li", {
-			text: "r/^(drafts|scratch)\\// → Skips drafts/ and scratch/",
+			text: t("r/^(drafts|scratch)\\// → Skips drafts/ and scratch/"),
 		});
 
 		// Skip target format setting
 		this.skipTargetFormatSetting = new Setting(skipContainer)
-			.setName("Skip images in target format ⓘ")
+			.setName(t("Skip images in target format ⓘ"))
 			.setTooltip(
-				"If image is already in target format, this allows you to skip its compression, conversion and resizing. Processing of all other formats will be still performed.",
+				t("If image is already in target format, this allows you to skip its compression, conversion and resizing. Processing of all other formats will be still performed."),
 			)
 			.addToggle((toggle) =>
 				toggle
@@ -372,7 +373,7 @@ export class ProcessCurrentNote extends Modal {
 			cls: "button-container",
 		});
 		this.submitButton = new ButtonComponent(buttonContainer)
-			.setButtonText("Submit")
+			.setButtonText(t("Submit"))
 			.onClick(async () => {
 				// Use async here
 				this.close();
@@ -387,7 +388,7 @@ export class ProcessCurrentNote extends Modal {
 				} else {
 					 
 					new Notice(
-						"Error: active file must be a markdown or canvas file.",
+						t("Error: active file must be a markdown or canvas file."),
 					);
 				}
 			});
@@ -421,10 +422,10 @@ export class ProcessCurrentNote extends Modal {
 
         this.enlargeReduceSettings = new Setting(this.enlargeReduceDiv)
             .setClass('enlarge-reduce-setting')
-            .setName('Enlarge or reduce ⓘ')
-            .setDesc('Controls how images are adjusted relative to target size:')
+            .setName(t("Enlarge or reduce ⓘ"))
+            .setDesc(t("Controls how images are adjusted relative to target size:"))
              
-            .setTooltip('• Reduce and enlarge: adjusts all images to fit specified dimensions\n• Reduce only: only shrinks images larger than target\n• Enlarge only: only enlarges images smaller than target')
+            .setTooltip(t("• Reduce and enlarge: adjusts all images to fit specified dimensions\n• Reduce only: only shrinks images larger than target\n• Enlarge only: only enlarges images smaller than target"))
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
@@ -468,7 +469,7 @@ export class ProcessCurrentNote extends Modal {
                 .setName(name)
                 .setDesc(desc)
                 .addText((text: TextComponent) => text
-                    .setPlaceholder('Width')
+                    .setPlaceholder(t("Width"))
                     .setValue(this.plugin.settings.ProcessCurrentNoteresizeModaldesiredWidth.toString())
                     .onChange(async (value: string) => {
                         const width = parseInt(value);
@@ -478,7 +479,7 @@ export class ProcessCurrentNote extends Modal {
                         }
                     }))
                 .addText((text: TextComponent) => text
-                    .setPlaceholder('Height')
+                    .setPlaceholder(t("Height"))
                     .setValue(this.plugin.settings.ProcessCurrentNoteresizeModaldesiredHeight.toString())
                     .onChange(async (value: string) => {
                         const height = parseInt(value);
@@ -508,7 +509,7 @@ export class ProcessCurrentNote extends Modal {
                 .setName(name)
                 .setDesc(desc)
                 .addText((text: TextComponent) => text
-                    .setPlaceholder('')
+                    .setPlaceholder(t(""))
                     .setValue(this.getInitialValue(resizeMode).toString())
                     .onChange(async (value: string) => {
                         const length = parseInt(value);

@@ -1,3 +1,4 @@
+import { t } from "./i18n";
 import { App, Component, Modal, Notice, TFile } from 'obsidian';
 
 
@@ -138,7 +139,7 @@ export class Crop extends Modal {
 	
 		// Create modal structure
 		const modalHeader = modalWrapper.createDiv('crop-modal-header');
-		modalHeader.createEl('h2', { text: 'Crop image' });
+		modalHeader.createEl('h2', { text: t("Crop image") });
 	
 		// Create main container
 		const modalContent = modalWrapper.createDiv('crop-modal-content');
@@ -153,16 +154,16 @@ export class Crop extends Modal {
 	
 		// Create buttons - Move this inside modalWrapper
 		const buttonContainer = modalWrapper.createDiv('crop-modal-buttons');
-		const saveButton = buttonContainer.createEl('button', { text: 'Save' });
-		const cancelButton = buttonContainer.createEl('button', { text: 'Cancel' });
-		const resetButton = buttonContainer.createEl('button', { text: 'Reset' });
+		const saveButton = buttonContainer.createEl('button', { text: t("Save") });
+		const cancelButton = buttonContainer.createEl('button', { text: t("Cancel") });
+		const resetButton = buttonContainer.createEl('button', { text: t("Reset") });
 		
 		// Add aspect ratio controls
 		const aspectRatioContainer = modalHeader.createDiv('aspect-ratio-controls');
 		
 		// Add transform controls
 		this.createTransformControls(aspectRatioContainer);
-		aspectRatioContainer.createEl('span', { text: ' ' });
+		aspectRatioContainer.createEl('span', { text: t(" ") });
 		
 		// Create ratio buttons container
 		const ratioButtonsContainer = aspectRatioContainer.createDiv('ratio-buttons-container');
@@ -216,7 +217,7 @@ export class Crop extends Modal {
 			cls: 'custom-ratio-input'
 		});
 		
-		customRatioContainer.createEl('span', { text: ':' });
+		customRatioContainer.createEl('span', { text: t(":") });
 		
 		const heightInput = customRatioContainer.createEl('input', {
 			type: 'number',
@@ -265,7 +266,7 @@ export class Crop extends Modal {
             this.componentContainer.registerDomEvent(cancelButton, 'click', () => this.close());
             this.componentContainer.registerDomEvent(resetButton, 'click', () => this.resetSelection());
         } catch (error) {
-            new Notice('Error loading image for cropping');
+            new Notice(t("Error loading image for cropping"));
             console.error('Crop modal error:', error);
             this.close();
         }
@@ -366,14 +367,14 @@ export class Crop extends Modal {
 		
     const rotateLeftBtn = rotateContainer.createEl('button', {
 			cls: 'transform-button',
-			text: '↺',
-			attr: { title: '90° counter clockwise' }
+			text: t("↺"),
+			attr: { title: t("90° counter clockwise") }
 		});
 		
 		const rotateRightBtn = rotateContainer.createEl('button', {
 			cls: 'transform-button',
-			text: '↻',
-			attr: { title: '90° clockwise' }
+			text: t("↻"),
+			attr: { title: t("90° clockwise") }
 		});
 		
 		// Flip controls
@@ -381,14 +382,14 @@ export class Crop extends Modal {
 		
 		const flipHorizontalBtn = flipContainer.createEl('button', {
 			cls: 'transform-button',
-			text: '↔',
-			attr: { title: 'Flip horizontally' }
+			text: t("↔"),
+			attr: { title: t("Flip horizontally") }
 		});
 		
 		const flipVerticalBtn = flipContainer.createEl('button', {
 			cls: 'transform-button',
-			text: '↕',
-			attr: { title: 'Flip vertically' }
+			text: t("↕"),
+			attr: { title: t("Flip vertically") }
 		});
 		
 		// Add event listeners
@@ -421,10 +422,10 @@ export class Crop extends Modal {
 
 		// Rotation controls
 		const rotationContainer = controlsContainer.createDiv({ cls: 'control-group rotation-controls' });
-		rotationContainer.createEl('span', { text: 'Rotation: ', cls: 'control-label' });
+		rotationContainer.createEl('span', { text: t("Rotation: "), cls: 'control-label' });
 
 		const rotationValue = rotationContainer.createEl('span', {
-			text: '0°',
+			text: t("0°"),
 			cls: 'rotation-value'
 		});
 
@@ -441,10 +442,10 @@ export class Crop extends Modal {
 
 		// Zoom controls
 		const zoomContainer = controlsContainer.createDiv({ cls: 'control-group zoom-controls' });
-		zoomContainer.createEl('span', { text: 'Zoom: ', cls: 'control-label' });
+		zoomContainer.createEl('span', { text: t("Zoom: "), cls: 'control-label' });
 
 		const zoomValue = zoomContainer.createEl('span', {
-			text: '100%',
+			text: t("100%"),
 			cls: 'zoom-value'
 		});
 
@@ -945,7 +946,7 @@ export class Crop extends Modal {
 	
 			await this.app.vault.modifyBinary(this.imageFile, arrayBuffer);
 	
-			new Notice('Image saved successfully');
+			new Notice(t("Image saved successfully"));
 	
 			const leaf = this.app.workspace.getMostRecentLeaf();
 			if (leaf) {
@@ -962,7 +963,7 @@ export class Crop extends Modal {
 	} catch (error) {
 			console.error('Save error:', error);
 			const message = error instanceof Error ? error.message : String(error);
-			new Notice(`Error saving image: ${message}`);
+			new Notice(t("Error saving image: {p0}", { p0: message }));
 		}
 	}
 

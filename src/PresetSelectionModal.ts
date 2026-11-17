@@ -1,3 +1,4 @@
+import { t } from "./i18n";
 import { Modal, Notice, App, Setting, ButtonComponent, DropdownComponent, TextComponent } from "obsidian";
 import {
     ImageConverterSettings,
@@ -189,7 +190,7 @@ export class PresetSelectionModal extends Modal {
         // Title on the left
         header.createEl("h2", { 
           // eslint-disable-next-line obsidianmd/ui/sentence-case -- Plugin name
-            text: "Image Converter",
+            text: t("Image Converter"),
             cls: "image-converter-compact-title"
         });
         
@@ -198,8 +199,8 @@ export class PresetSelectionModal extends Modal {
         new Setting(variablesButton)
             .addButton((button) => {
                 button
-                    .setButtonText("{Variables}")
-                    .setTooltip("Show available variables")
+                    .setButtonText(t("{Variables}"))
+                    .setTooltip(t("Show available variables"))
                     .onClick(() => this.showAvailableVariables());
                 button.buttonEl.addClass("image-converter-variables-header-btn");
             });
@@ -358,7 +359,7 @@ export class PresetSelectionModal extends Modal {
         
         // Chevron icon (moved to the right)
         this.processingCardChevron = headerContent.createEl("span", {
-            text: "▶",
+            text: t("▶"),
             cls: "image-converter-processing-card-chevron"
         });
         
@@ -371,8 +372,8 @@ export class PresetSelectionModal extends Modal {
         
         // Column Header Row 1: Format and Link
         const headerRow1 = this.processingCardContent.createDiv("image-converter-grid-header-row");
-        headerRow1.createEl("div", { text: "Format", cls: "image-converter-grid-header" });
-        headerRow1.createEl("div", { text: "Link", cls: "image-converter-grid-header" });
+        headerRow1.createEl("div", { text: t("Format"), cls: "image-converter-grid-header" });
+        headerRow1.createEl("div", { text: t("Link"), cls: "image-converter-grid-header" });
         
         // Component Row 1: Format dropdown and Link dropdown
         const componentRow1 = this.processingCardContent.createDiv("image-converter-grid-component-row");
@@ -416,9 +417,9 @@ export class PresetSelectionModal extends Modal {
 
         // Column Header Row 2: Resize and Quality
         const headerRow2 = this.processingCardContent.createDiv("image-converter-grid-header-row");
-        headerRow2.createEl("div", { text: "Resize", cls: "image-converter-grid-header" });
+        headerRow2.createEl("div", { text: t("Resize"), cls: "image-converter-grid-header" });
         const qualityHeader = headerRow2.createEl("div", { 
-            text: `Quality ${this.selectedConversionPreset.quality}%`, 
+            text: t("Quality {p0}%", { p0: this.selectedConversionPreset.quality }), 
             cls: "image-converter-grid-header image-converter-quality-header" 
         });
         
@@ -472,7 +473,7 @@ export class PresetSelectionModal extends Modal {
         const previewSection = container.createDiv("image-converter-compact-preview");
         
         const previewHeader = previewSection.createDiv("image-converter-preview-header-compact");
-        previewHeader.createEl("span", { text: "Preview", cls: "image-converter-preview-title-compact" });
+        previewHeader.createEl("span", { text: t("Preview"), cls: "image-converter-preview-title-compact" });
         
         this.previewContainer = previewSection.createDiv("image-converter-preview-content-compact");
     }
@@ -491,7 +492,7 @@ export class PresetSelectionModal extends Modal {
         new Setting(actionSection)
             .addButton((button: ButtonComponent) => {
                 button
-                    .setButtonText("Edit presets")
+                    .setButtonText(t("Edit presets"))
                     .onClick(() => {
                         this.close();
                         const appWithSettings = this.app as { setting?: { open(): void; openTabById(id: string): void } };
@@ -499,13 +500,13 @@ export class PresetSelectionModal extends Modal {
                             appWithSettings.setting.open();
                             appWithSettings.setting.openTabById(this.plugin.manifest.id);
                         } else {
-                            new Notice("Unable to open settings.");
+                            new Notice(t("Unable to open settings."));
                         }
                     });
             })
             .addButton((button) => {
                 button
-                    .setButtonText("Apply")
+                    .setButtonText(t("Apply"))
                     .setCta()
                     .onClick(() => {
                         // Save current session state to settings for persistence
@@ -541,7 +542,7 @@ export class PresetSelectionModal extends Modal {
         // Global preset dropdown only (Variables button is now in the header)
         const miniSetting = new Setting(contentEl)
             .addDropdown((dropdown: DropdownComponent) => {
-                dropdown.addOption("none", "None");
+                dropdown.addOption("none", t("None"));
                 this.settings.globalPresets.forEach((preset) => {
                     dropdown.addOption(preset.name, preset.name);
                 });
@@ -681,7 +682,7 @@ export class PresetSelectionModal extends Modal {
                     });
                 } else {
                     newContent.createEl("div", {
-                        text: "Enter templates to see preview",
+                        text: t("Enter templates to see preview"),
                         cls: "image-converter-preview-empty-compact"
                     });
                 }
@@ -696,7 +697,7 @@ export class PresetSelectionModal extends Modal {
                 if (this.previewContainer) {
                     this.previewContainer.empty();
                     this.previewContainer.createEl("div", {
-                        text: "Error generating preview",
+                        text: t("Error generating preview"),
                         cls: "image-converter-preview-error-compact"
                     });
                 }

@@ -28,6 +28,7 @@ Supported image formats: WEBP, JPG, PNG, HEIC, TIF
 	- **Rename**: Use variables (e.g., `{noteName}`, `{fileName}`) to auto-rename images [List of Supported Variables](<docs/Variables Reference Guide.md>)
 	- **Output**: Organize images into custom output folders with variables.[List of Supported Variables](<docs/Variables Reference Guide.md>)
 - 🌍 **Pure JavaScript implementation** that works completely **offline**. No external APIs or binary dependencies (such as ImageMagick, Cloudinary, FFmpeg, sharp, etc.) required - keeping it lightweight, portable and secure.
+- 🌐 **Multi-language interface**: available in **English** and **简体中文 (Simplified Chinese)** — see [Language](#-language--语言).
 
 
 ## Other
@@ -51,6 +52,17 @@ Supported image formats: WEBP, JPG, PNG, HEIC, TIF
 - [How to compress images without quality loss - empirical analysis of image format vs image quality vs file size](<docs/How to compress images without quality loss - empirical analysis of image format vs image quality vs file size.md>)
 - Optional PNG optimization (pngquant): see docs/pngquant.md
 
+
+## 🌐 Language / 语言
+
+The interface is available in **English** and **简体中文 (Simplified Chinese)**. On first install the plugin follows your Obsidian display language; you can override it at any time in **Settings → Community plugins → Image Converter → Language**.
+
+界面支持 **English** 和 **简体中文**。首次安装时会跟随 Obsidian 的显示语言，之后可在 **设置 → 第三方插件 → Image Converter → Language（语言）** 中随时切换。
+
+> [!NOTE]
+> The settings panel updates immediately after switching. Command names and the right-click context menu are registered when Obsidian starts, so **reload the plugin** (or restart Obsidian) to see them in the new language.
+>
+> 切换语言后设置面板会立即更新；命令名和右键菜单在 Obsidian 启动时注册，需要**重载插件**（或重启 Obsidian）才会切换为新语言。
 
 ## How to install
 

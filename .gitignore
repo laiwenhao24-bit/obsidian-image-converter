@@ -28,3 +28,6 @@ data.json
 coverage/
 *.lcov
 .vscode-test/
+
+# Local WorkBuddy workspace data
+.workbuddy/
