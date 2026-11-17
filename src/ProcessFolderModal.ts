@@ -336,9 +336,9 @@ export class ProcessFolderModal extends Modal {
                 dropdown
                     .addOption("disabled", t("Same as original"))
                     .addOptions({
-                        webp: "WebP",
-                        jpg: "JPG",
-                        png: "PNG",
+                        webp: t("WebP"),
+                        jpg: t("JPG"),
+                        png: t("PNG"),
                     })
                     .setValue(this.plugin.settings.ProcessCurrentNoteconvertTo)
                     .onChange(async (value) => {
@@ -452,13 +452,13 @@ export class ProcessFolderModal extends Modal {
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
-                        None: "None",
-                        Fit: "Fit (maintain aspect ratio within dimensions)",
-                        Fill: "Fill (exactly match dimensions)",
-                        LongestEdge: "Longest edge",
-                        ShortestEdge: "Shortest edge",
-                        Width: "Width",
-                        Height: "Height",
+                        None: t("None"),
+                        Fit: t("Fit (maintain aspect ratio within dimensions)"),
+                        Fill: t("Fill (exactly match dimensions)"),
+                        LongestEdge: t("Longest edge"),
+                        ShortestEdge: t("Shortest edge"),
+                        Width: t("Width"),
+                        Height: t("Height"),
                     })
                     .setValue(
                         this.plugin.settings
@@ -547,9 +547,9 @@ export class ProcessFolderModal extends Modal {
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
-                        Always: "Reduce and enlarge",
-                        Reduce: "Reduce only",
-                        Enlarge: "Enlarge only",
+                        Always: t("Reduce and enlarge"),
+                        Reduce: t("Reduce only"),
+                        Enlarge: t("Enlarge only"),
                     })
                     .setValue(
                         this.plugin.settings.ProcessCurrentNoteEnlargeOrReduce

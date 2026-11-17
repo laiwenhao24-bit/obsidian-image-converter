@@ -283,7 +283,7 @@ export class PresetSelectionModal extends Modal {
             .setClass("image-converter-preset-dropdown-setting")
             .addDropdown((dropdown) => {
                 presets.forEach((preset) => {
-                    dropdown.addOption(preset.name, preset.name);
+                    dropdown.addOption(preset.name, t(preset.name));
                 });
                 dropdown.setValue(selectedPreset.name);
                 dropdown.onChange(onPresetChange);
@@ -383,7 +383,7 @@ export class PresetSelectionModal extends Modal {
         this.conversionPresetDropdown = new Setting(formatDiv)
             .addDropdown((dropdown) => {
                 this.settings.conversionPresets.forEach((preset) => {
-                    dropdown.addOption(preset.name, preset.name);
+                    dropdown.addOption(preset.name, t(preset.name));
                 });
                 dropdown.setValue(this.selectedConversionPreset.name);
                 dropdown.onChange((value) => {
@@ -402,7 +402,7 @@ export class PresetSelectionModal extends Modal {
         this.linkFormatPresetDropdown = new Setting(linkDiv)
             .addDropdown((dropdown) => {
                 this.settings.linkFormatSettings.linkFormatPresets.forEach((preset) => {
-                    dropdown.addOption(preset.name, preset.name);
+                    dropdown.addOption(preset.name, t(preset.name));
                 });
                 dropdown.setValue(this.selectedLinkFormatPreset.name);
                 dropdown.onChange((value) => {
@@ -431,7 +431,7 @@ export class PresetSelectionModal extends Modal {
         this.resizePresetDropdown = new Setting(resizeDiv)
             .addDropdown((dropdown) => {
                 this.settings.nonDestructiveResizeSettings.resizePresets.forEach((preset) => {
-                    dropdown.addOption(preset.name, preset.name);
+                    dropdown.addOption(preset.name, t(preset.name));
                 });
                 dropdown.setValue(this.selectedResizePreset.name);
                 dropdown.onChange((value) => {
@@ -544,7 +544,7 @@ export class PresetSelectionModal extends Modal {
             .addDropdown((dropdown: DropdownComponent) => {
                 dropdown.addOption("none", t("None"));
                 this.settings.globalPresets.forEach((preset) => {
-                    dropdown.addOption(preset.name, preset.name);
+                    dropdown.addOption(preset.name, t(preset.name));
                 });
                 dropdown.setValue(
                     this.selectedGlobalPreset

@@ -541,7 +541,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             switch (this.activeTab) {
                 case "folder":
                     this.renderPresetGroup(
-                        "Folder presets",
+                        t("Folder presets"),
                         this.plugin.settings.folderPresets,
                         "selectedFolderPreset",
                         this.presetUIState.folder
@@ -549,7 +549,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                     break;
                 case "filename":
                     this.renderPresetGroup(
-                        "Filename presets",
+                        t("Filename presets"),
                         this.plugin.settings.filenamePresets,
                         "selectedFilenamePreset",
                         this.presetUIState.filename
@@ -557,7 +557,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                     break;
                 case "conversion":
                     this.renderPresetGroup(
-                        "Conversion presets",
+                        t("Conversion presets"),
                         this.plugin.settings.conversionPresets,
                         "selectedConversionPreset",
                         this.presetUIState.conversion
@@ -565,7 +565,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                     break;
                 case "linkformat":
                     this.renderPresetGroup(
-                        "Link format presets",
+                        t("Link format presets"),
                         this.plugin.settings.linkFormatSettings.linkFormatPresets,
                         "selectedLinkFormatPreset",
                         this.presetUIState.linkformat
@@ -573,7 +573,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                     break;
                 case "resize":
                     this.renderPresetGroup(
-                        "Resize presets",
+                        t("Resize presets"),
                         this.plugin.settings.nonDestructiveResizeSettings.resizePresets, // Correct type
                         "selectedResizePreset",
                         this.presetUIState.resize
@@ -600,7 +600,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
 
         new Setting(containerEl)
             .setName(t("Right-click menu"))
-            .then((setting) => addInfoIcon(setting, "Enable to show a right-click context menu."))
+            .then((setting) => addInfoIcon(setting, t("Enable to show a right-click context menu.")))
             .addToggle((toggle) =>
                 toggle
                     .setValue(this.plugin.settings.enableContextMenu)
@@ -617,7 +617,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
 
         new Setting(containerEl)
             .setName(t("Cursor position after drop/paste"))
-            .then((setting) => addInfoIcon(setting, "Where to place the cursor after dropping or pasting the image"))
+            .then((setting) => addInfoIcon(setting, t("Where to place the cursor after dropping or pasting the image")))
             .addDropdown((dropdown) => {
                 dropdown
                     .addOption("front", t("At the front of the link"))
@@ -632,7 +632,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
 
         new Setting(containerEl)
             .setName(t("Never process these filenames"))
-            .then((setting) => addInfoIcon(setting, "A comma-separated list of file names or patterns that the plugin should never process. Supports glob (*) and regex (enclosed in `/` or `r/` or `regex:`). E.g., `old.png, /^_/, r/temp-.*\\.jpg$/` . Or simply skip all cat images e.g.: /cat/ or all gif images *.gif"))
+            .then((setting) => addInfoIcon(setting, t("A comma-separated list of file names or patterns that the plugin should never process. Supports glob (*) and regex (enclosed in `/` or `r/` or `regex:`). E.g., `old.png, /^_/, r/temp-.*\\.jpg$/` . Or simply skip all cat images e.g.: /cat/ or all gif images *.gif")))
             .addTextArea((text) => {
                 text.setValue(this.plugin.settings.neverProcessFilenames)
                     .onChange(async (value) => {
@@ -644,7 +644,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
 
         new Setting(containerEl)
             .setName(t("Show notification for image size changes"))
-            .then((setting) => addInfoIcon(setting, 'Display a notification showing how much space was saved after processing an image.'))
+            .then((setting) => addInfoIcon(setting, t("Display a notification showing how much space was saved after processing an image.")))
             .addToggle(toggle => toggle
                 .setValue(this.plugin.settings.showSpaceSavedNotification)
                 .onChange(async (value) => {
@@ -732,7 +732,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             .addDropdown((dropdown) => {
                 dropdown.addOption("", t("None"));
                 this.plugin.settings.globalPresets.forEach((preset) => {
-                    dropdown.addOption(preset.name, preset.name);
+                    dropdown.addOption(preset.name, t(preset.name));
                 });
                 dropdown.setValue(this.plugin.settings.selectedGlobalPreset);
                 dropdown.onChange(async (value) => {
@@ -878,10 +878,10 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 .setDesc(t("Automatically apply this alignment when inserting new images. Set to 'none' to disable."))
                 .addDropdown(dropdown => dropdown
                     .addOptions({
-                        'none': 'None',
-                        'left': 'Left',
-                        'center': 'Center',
-                        'right': 'Right'
+                        'none': t("None"),
+                        'left': t("Left"),
+                        'center': t("Center"),
+                        'right': t("Right")
                     })
                     .setValue(this.plugin.settings.imageAlignmentDefaultAlignment)
                     .onChange(async (value: 'none' | 'left' | 'center' | 'right') => {
@@ -894,17 +894,17 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             new Setting(imageAlignmentSection)
                 .setName(t("Image alignment cache location"))
                 .setDesc(
-                    "Choose where to store the cache file for image alignments. " +
-                    "Note: App reload required."
+                    t("Choose where to store the cache file for image alignments. ") +
+                    t("Note: App reload required.")
                 )
                 .then((setting) => addInfoIcon(
                     setting,
-                    "If you use Obsidian Sync, it is strongly recommended to use the SAME location on all your devices to ensure consistent behavior. Default: Obsidian's config folder (syncable)."
+                    t("If you use Obsidian Sync, it is strongly recommended to use the SAME location on all your devices to ensure consistent behavior. Default: Obsidian's config folder (syncable).")
                 ))
                 .addDropdown(dropdown => dropdown
                     .addOptions({
-                        config: "Within config folder (syncable)",
-                        plugin: "Within plugin folder (not syncable)",
+                        config: t("Within config folder (syncable)"),
+                        plugin: t("Within plugin folder (not syncable)"),
                     })
                     .setValue(this.plugin.settings.imageAlignmentCacheLocation)
                     .onChange(async (value: "config" | "plugin") => {
@@ -1004,7 +1004,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             new Setting(imageDragResizeSection)
                 .setName(t("Enable drag resize"))
                 .setDesc(t("Allow resizing images by dragging edges of the image."))
-                .then((setting) => addInfoIcon(setting, "This creates a new <DIV> under the image to show resizing HANDLES. But this might cause some incompatibility with certain themes and cause images to jump around."))
+                .then((setting) => addInfoIcon(setting, t("This creates a new <DIV> under the image to show resizing HANDLES. But this might cause some incompatibility with certain themes and cause images to jump around.")))
                 .addToggle((toggle) =>
                     toggle
                         .setValue(this.plugin.settings.isDragResizeEnabled)
@@ -1055,11 +1055,11 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                     .setDesc(t("Key that must be held while using scroll-wheel to resize"))
                     .addDropdown(dropdown => dropdown
                         .addOptions({
-                            'None': 'None',
-                            'Shift': 'Shift',
-                            'Control': 'Control',
-                            'Alt': 'Alt',
-                            'Meta': 'Meta'
+                            'None': t("None"),
+                            'Shift': t("Shift"),
+                            'Control': t("Control"),
+                            'Alt': t("Alt"),
+                            'Meta': t("Meta")
                         })
                         .setValue(this.plugin.settings.scrollwheelModifier)
                         .onChange(async (value: "None" | "Shift" | "Control" | "Alt" | "Meta") => {
@@ -1082,7 +1082,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
 
             new Setting(imageDragResizeSection)
                 .setName(t("Disable Obsidian image selection on click"))
-                .then((setting) => addInfoIcon(setting, "Reveal the Markdown link and keep focus in the editor when clicking an internal image in live preview, while hiding Obsidian's native outline, resize corner, and image action buttons. Cursor placement follows the drop/paste cursor position setting."))
+                .then((setting) => addInfoIcon(setting, t("Reveal the Markdown link and keep focus in the editor when clicking an internal image in live preview, while hiding Obsidian's native outline, resize corner, and image action buttons. Cursor placement follows the drop/paste cursor position setting.")))
                 .setDesc(t("Reveal the Markdown link and keep focus in the editor when clicking an internal image in live preview, while hiding Obsidian's native outline, resize corner, and image action buttons. Cursor placement follows the drop/paste cursor position setting."))
                 .addToggle((toggle) =>
                     toggle
@@ -1102,7 +1102,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             // New Setting: Resize Cursor Location
             new Setting(imageDragResizeSection)
                 .setName(t("Cursor position during resize"))
-                .then((setting) => addInfoIcon(setting, "Where to place the cursor when resizing an image. Note: 'don't move cursor' - will try to keep your exisiting cursor in place but if you DRAG-RESIZE and cursor is still over the image when you finish resizing, it will get the text selected."))
+                .then((setting) => addInfoIcon(setting, t("Where to place the cursor when resizing an image. Note: 'don't move cursor' - will try to keep your exisiting cursor in place but if you DRAG-RESIZE and cursor is still over the image when you finish resizing, it will get the text selected.")))
                 .addDropdown((dropdown) => {
                     dropdown
                         .addOption("front", t("At the front of the link"))
@@ -1202,9 +1202,9 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 .setName(t("Text alignment within caption"))
                 .addDropdown(dropdown =>
                     dropdown.addOptions({
-                        "left": "Left",
-                        "center": "Center",
-                        "right": "Right"
+                        "left": t("Left"),
+                        "center": t("Center"),
+                        "right": t("Right")
                     })
                         .setValue(this.plugin.settings.captionAlignment)
                         .onChange(async (value) => {
@@ -1219,10 +1219,10 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 .setDesc(t("Set text transformation"))
                 .addDropdown(dropdown =>
                     dropdown.addOptions({
-                        "none": "None",
-                        "uppercase": "UPPERCASE",
-                        "lowercase": "lowercase",
-                        "capitalize": "Capitalize"
+                        "none": t("None"),
+                        "uppercase": t("UPPERCASE"),
+                        "lowercase": t("lowercase"),
+                        "capitalize": t("Capitalize")
                     })
                         .setValue(this.plugin.settings.captionTextTransform)
                         .onChange(async (value) => {
@@ -1249,13 +1249,13 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 .setDesc(t("Set font weight (e.g., normal, bold, 600)"))
                 .addDropdown(dropdown =>
                     dropdown.addOptions({
-                        "normal": "Normal",
-                        "bold": "Bold",
-                        ["300"]: "Light",
-                        ["400"]: "Regular",
-                        ["500"]: "Medium",
-                        ["600"]: "Semi-bold",
-                        ["700"]: "Bold"
+                        "normal": t("Normal"),
+                        "bold": t("Bold"),
+                        ["300"]: t("Light"),
+                        ["400"]: t("Regular"),
+                        ["500"]: t("Medium"),
+                        ["600"]: t("Semi-bold"),
+                        ["700"]: t("Bold")
                     })
                         .setValue(this.plugin.settings.captionFontWeight)
                         .onChange(async (value) => {
@@ -1282,7 +1282,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 .setDesc(t("Set the font style (e.g., italic, normal)."))
                 .addDropdown(dropdown =>
                     dropdown.addOptions({
-                        "italic": "Italic", "normal": "Normal"
+                        "italic": t("Italic"), "normal": t("Normal")
                     })
                         .setValue(this.plugin.settings.captionFontStyle)
                         .onChange(async (value) => {
@@ -1381,7 +1381,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             this.createTab("folder", "folder", "Folder");
             this.createTab("filename", "pencil", "Filename");
             this.createTab("conversion", "settings", "Conversion");
-            this.createTab("linkformat", "link", "Link format");
+            this.createTab("linkformat", "link", t("Link format"));
             this.createTab("resize", "frame", "Resize");
         }
 
@@ -1557,15 +1557,15 @@ export class ImageConverterSettingTab extends PluginSettingTab {
     getPresetGroupDescription(activePresetSetting: ActivePresetSetting): string {
         switch (activePresetSetting) {
             case "selectedFolderPreset":
-                return "Define where converted images will be stored. Choose from predefined locations or create custom paths using variables.";
+                return t("Define where converted images will be stored. Choose from predefined locations or create custom paths using variables.");
             case "selectedFilenamePreset":
-                return "Control how converted images are named. Use variables like {notename}, {timestamp}, {uuid}, or {MD5:filename} to create unique filenames.";
+                return t("Control how converted images are named. Use variables like {notename}, {timestamp}, {uuid}, or {MD5:filename} to create unique filenames.");
             case "selectedConversionPreset":
-                return "Control the output format, quality, and resizing options for converted images. This allows to significantly reduce file size and keep vault size small.";
+                return t("Control the output format, quality, and resizing options for converted images. This allows to significantly reduce file size and keep vault size small.");
             case "selectedLinkFormatPreset":
-                return "Determine how image links are inserted into notes. Choose between Wikilinks and Markdown links, and specify how the file path should be formatted. This allows to use a different link style for images than your vault's default, offering better cross-compatibility with other applications.";
+                return t("Determine how image links are inserted into notes. Choose between Wikilinks and Markdown links, and specify how the file path should be formatted. This allows to use a different link style for images than your vault's default, offering better cross-compatibility with other applications.");
             case "selectedResizePreset":
-                return "Configure non-destructive resizing options for images directly within the editor. This allows to adjust the display size without altering the original file.";
+                return t("Configure non-destructive resizing options for images directly within the editor. This allows to adjust the display size without altering the original file.");
             default:
                 return "";
         }
@@ -1638,9 +1638,9 @@ export class ImageConverterSettingTab extends PluginSettingTab {
         // Preset Name and Summary
         const cardHeader = card.createDiv("image-converter-preset-card-header");
         cardHeader.createEl("span", {
-            text: preset.name,
+            text: t(preset.name),
             cls: "image-converter-preset-card-title",
-            title: preset.name, // Add the full name as a tooltip
+            title: t(preset.name), // Add the full name as a tooltip
         });
 
         if (!this.isDefaultPreset(preset, activePresetSetting)) {
@@ -1842,7 +1842,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             );
 
             // Add Skip Rename Patterns Setting for Filename Preset
-            this.addSkipPatternsSetting(formContainer, preset as FilenamePreset, 'skipRenamePatterns', 'Skip rename patterns');
+            this.addSkipPatternsSetting(formContainer, preset as FilenamePreset, 'skipRenamePatterns', t("Skip rename patterns"));
         } else if (activePresetSetting === "selectedLinkFormatPreset") {
             this.renderLinkFormatFormFields(formContainer, preset as LinkFormatPreset);
         } else if (activePresetSetting === "selectedResizePreset") {
@@ -1853,7 +1853,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 preset as ConversionPreset
             );
             // Add Skip Patterns Setting for Conversion Preset
-            this.addSkipPatternsSetting(formContainer, preset as ConversionPreset, 'skipConversionPatterns', 'Skip conversion patterns');
+            this.addSkipPatternsSetting(formContainer, preset as ConversionPreset, 'skipConversionPatterns', t("Skip conversion patterns"));
 
         }
 
@@ -1932,8 +1932,8 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
-                        reuse: "Reuse existing file in vault (if any)",
-                        increment: "Add number suffix (-1, -2, etc.)",
+                        reuse: t("Reuse existing file in vault (if any)"),
+                        increment: t("Add number suffix (-1, -2, etc.)"),
                     })
                     .setValue(preset.conflictResolution || "reuse")
                     .onChange((value: "reuse" | "increment") => {
@@ -2143,13 +2143,13 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
-                        WEBP: "WEBP",
-                        JPEG: "JPEG",
-                        PNG: "PNG",
-                        ORIGINAL: "Original (Compress)",
-                        NONE: "None (No Conversion/Compression)",
-                        PNGQUANT: "pngquant (Compression for PNG only))",
-                        AVIF: "AVIF (via ffmpeg)",
+                        WEBP: t("WEBP"),
+                        JPEG: t("JPEG"),
+                        PNG: t("PNG"),
+                        ORIGINAL: t("Original (Compress)"),
+                        NONE: t("None (No Conversion/Compression)"),
+                        PNGQUANT: t("pngquant (Compression for PNG only))"),
+                        AVIF: t("AVIF (via ffmpeg)"),
                     })
                     .setValue(preset.outputFormat)
                     .onChange((value: OutputFormat) => {
@@ -2284,7 +2284,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
         if (preset.outputFormat === "PNGQUANT") {
             const executablePathSetting = new Setting(containerEl)
                 .setName(t("Executable path for pngquant"))
-                .then((setting) => addInfoIcon(setting, "Provide full-path to the binary file. It can be inside vault or anywhere in your file system."))
+                .then((setting) => addInfoIcon(setting, t("Provide full-path to the binary file. It can be inside vault or anywhere in your file system.")))
                 .setClass("image-converter-pngquant-executable-path") // Add class for easy selection
                 .addText((text) => {
                     text.setValue(preset.pngquantExecutablePath || "")
@@ -2337,8 +2337,8 @@ export class ImageConverterSettingTab extends PluginSettingTab {
 
             let encoderDetectionButton: ButtonComponent | undefined;
 
-            const defaultEncoderDesc = "Detect and validate working AV1 encoder by running a test encode. This ensures hardware encoders are actually available on your system.";
-            const defaultCrfDesc = "Constant rate factor for AVIF (0-63, lower is better quality). Range varies by encoder - click 'Detect encoder' to see the specific range.";
+            const defaultEncoderDesc = t("Detect and validate working AV1 encoder by running a test encode. This ensures hardware encoders are actually available on your system.");
+            const defaultCrfDesc = t("Constant rate factor for AVIF (0-63, lower is better quality). Range varies by encoder - click 'Detect encoder' to see the specific range.");
 
             const resetEncoderUi = (encoderDetectionSetting: Setting, crfSetting: Setting, presetSetting: Setting) => {
                 encoderDetectionSetting.setDesc(defaultEncoderDesc);
@@ -2369,7 +2369,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             const executablePathSetting = new Setting(containerEl)
                 // eslint-disable-next-line obsidianmd/ui/sentence-case -- Product name
                 .setName(t("FFmpeg executable path"))
-                .then((setting) => addInfoIcon(setting, "Provide full-path to the binary file. It can be inside vault or anywhere in your file system."))
+                .then((setting) => addInfoIcon(setting, t("Provide full-path to the binary file. It can be inside vault or anywhere in your file system.")))
                 .setClass("image-converter-ffmpeg-executable-path")
                 .addButton(button => {
                     button
@@ -2592,9 +2592,9 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             const encoderDetectionDesc = (encoderLabel: string, crfMin?: number, crfMax?: number) => {
                 encoderDetectionSetting.setDesc(
                     buildEncoderDesc(
-                        "Working encoder: ",
+                        t("Working encoder: "),
                         encoderLabel,
-                        `. CRF range: ${crfMin ?? "?"}-${crfMax ?? "?"}`
+                        t(". CRF range: {p0}-{p1}", { p0: crfMin ?? "?", p1: crfMax ?? "?" })
                     )
                 );
             };
@@ -2602,9 +2602,9 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             const crfDesc = (encoderLabel: string, crfMin?: number, crfMax?: number) => {
                 crfSetting.setDesc(
                     buildEncoderDesc(
-                        "Constant rate factor for ",
+                        t("Constant rate factor for "),
                         encoderLabel,
-                        ` (${crfMin ?? "?"}-${crfMax ?? "?"}, lower is better quality).`
+                        t(" ({p0}-{p1}, lower is better quality).", { p0: crfMin ?? "?", p1: crfMax ?? "?" })
                     )
                 );
             };
@@ -2621,16 +2621,16 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 .addDropdown(dropdown => {
                     dropdown
                         .addOptions({
-                            ultrafast: "ultrafast",
-                            superfast: "superfast",
-                            veryfast: "veryfast",
-                            faster: "faster",
-                            fast: "fast",
-                            medium: "medium",
-                            slow: "slow",
-                            slower: "slower",
-                            veryslow: "veryslow",
-                            placebo: "placebo",
+                            ultrafast: t("ultrafast"),
+                            superfast: t("superfast"),
+                            veryfast: t("veryfast"),
+                            faster: t("faster"),
+                            fast: t("fast"),
+                            medium: t("medium"),
+                            slow: t("slow"),
+                            slower: t("slower"),
+                            veryslow: t("veryslow"),
+                            placebo: t("placebo"),
                         })
                         .setValue(preset.ffmpegPreset || "medium") // default
                         .onChange(value => {
@@ -2706,13 +2706,13 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
-                        None: "None",
-                        Fit: "Fit",
-                        Fill: "Fill",
-                        LongestEdge: "Longest Edge",
-                        ShortestEdge: "Shortest Edge",
-                        Width: "Width",
-                        Height: "Height",
+                        None: t("None"),
+                        Fit: t("Fit"),
+                        Fill: t("Fill"),
+                        LongestEdge: t("Longest Edge"),
+                        ShortestEdge: t("Shortest Edge"),
+                        Width: t("Width"),
+                        Height: t("Height"),
                     })
                     .setValue(preset.resizeMode)
                     .onChange((value: ResizeMode) => {
@@ -2780,7 +2780,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             existingEdgeSetting?.remove();
 
             const newSetting = new Setting(containerEl)
-                .setName(preset.resizeMode === "LongestEdge" ? "Desired longest edge" : "Desired shortest edge") // Dynamically set the name
+                .setName(preset.resizeMode === "LongestEdge" ? t("Desired longest edge") : t("Desired shortest edge")) // Dynamically set the name
                 .setClass(preset.resizeMode === "LongestEdge" ? "image-converter-desired-longest-edge-setting" : "image-converter-desired-shortest-edge-setting") // Dynamically set the class
                 .addText((text) => {
                     text.setValue(
@@ -2804,9 +2804,9 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 .addDropdown((dropdown) => {
                     dropdown
                         .addOptions({
-                            Auto: "Auto",
-                            Reduce: "Only Reduce",
-                            Enlarge: "Only Enlarge",
+                            Auto: t("Auto"),
+                            Reduce: t("Only Reduce"),
+                            Enlarge: t("Only Enlarge"),
                         })
                         .setValue(preset.enlargeOrReduce)
                         .onChange((value: EnlargeReduce) => {
@@ -2881,7 +2881,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
 
         // 1. Preset Management:
         this.renderPresetGroup(
-            "Link format presets",
+            t("Link format presets"),
             this.plugin.settings.linkFormatSettings.linkFormatPresets,
             "selectedLinkFormatPreset",
             this.presetUIState.linkformat
@@ -2900,8 +2900,8 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
-                        wikilink: "Wikilink",
-                        markdown: "Markdown",
+                        wikilink: t("Wikilink"),
+                        markdown: t("Markdown"),
                     })
                     .setValue(preset.linkFormat)
                     .onChange((value: LinkFormat) => {
@@ -2917,9 +2917,9 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
-                        shortest: "Shortest",
-                        relative: "Relative",
-                        absolute: "Absolute",
+                        shortest: t("Shortest"),
+                        relative: t("Relative"),
+                        absolute: t("Absolute"),
                     })
                     .setValue(preset.pathFormat)
                     .onChange((value: PathFormat) => {
@@ -3185,7 +3185,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             try {
                 const ctx = this.getPreviewContext();
                 const processedPath = await this.plugin.variableProcessor.processTemplate(template, ctx);
-                exampleEl.textContent = `Example: ${processedPath}`;
+                exampleEl.textContent = t("Example: {p0}", { p0: processedPath });
             } catch (error) {
                 console.error('Preview generation error:', error);
             exampleEl.textContent = t("Example: error generating preview");
@@ -3194,27 +3194,27 @@ export class ImageConverterSettingTab extends PluginSettingTab {
 
         switch (preset.type) {
             case "DEFAULT":
-                addLine("Default (Using Obsidian's configured setting for attachments)");
+                addLine(t("Default (Using Obsidian's configured setting for attachments)"));
                 void addExample("Assets/{notename}/{imagename}");
                 break;
             case "ROOT":
-                addLine("Root folder of the vault (Top-level folder).");
+                addLine(t("Root folder of the vault (Top-level folder)."));
                 void addExample("{imagename}");
                 break;
             case "CURRENT":
-                addLine("Same folder as the note you're currently editing.");
+                addLine(t("Same folder as the note you're currently editing."));
                 void addExample("{notepath}/{imagename}");
                 break;
             case "SUBFOLDER":
-                addLine(`In subfolder: ${this.plugin.settings.subfolderTemplate}`);
+                addLine(t("In subfolder: {p0}", { p0: this.plugin.settings.subfolderTemplate }));
                 void addExample(this.plugin.settings.subfolderTemplate);
                 break;
             case "CUSTOM":
-                addLine(`Custom location: ${preset.customTemplate}`);
+                addLine(t("Custom location: {p0}", { p0: preset.customTemplate ?? "" }));
                 void addExample(preset.customTemplate || "");
                 break;
             default:
-                addLine("Unknown location");
+                addLine(t("Unknown location"));
                 break;
         }
 
@@ -3238,21 +3238,21 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             try {
                 const ctx = this.getPreviewContext();
                 const processedPath = await this.plugin.variableProcessor.processTemplate(template, ctx);
-                exampleEl.textContent = `Example: ${processedPath}`;
+                exampleEl.textContent = t("Example: {p0}", { p0: processedPath });
             } catch (error) {
                 console.error('Preview generation error:', error);
                 exampleEl.textContent = t("Example: error generating preview");
             }
         };
 
-        addLine(`Template: ${preset.customTemplate || "{imagename}"}`);
+        addLine(t("Template: {p0}", { p0: preset.customTemplate || "{imagename}" }));
         void addExample(preset.customTemplate || "{imagename}");
 
         if (preset.skipRenamePatterns) {
-            addLine(`Skip rename patterns: ${preset.skipRenamePatterns}`);
+            addLine(t("Skip rename patterns: {p0}", { p0: preset.skipRenamePatterns }));
         }
         if (preset.conflictResolution) {
-            addLine(`If an output file already exists: ${preset.conflictResolution}`);
+            addLine(t("If an output file already exists: {p0}", { p0: preset.conflictResolution }));
         }
 
         containerEl.appendChild(fragment);
@@ -3261,7 +3261,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
 
 
     getLinkFormatPresetSummary(preset: LinkFormatPreset): string {
-        return `Link Type: ${preset.linkFormat}, Path Type: ${preset.pathFormat}`;
+        return t("Link Type: {p0}, Path Type: {p1}", { p0: preset.linkFormat, p1: preset.pathFormat });
     }
 
     getConversionPresetSummary(preset: ConversionPreset): DocumentFragment {
@@ -3271,58 +3271,58 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             fragment.createEl("p", { text });
         };
 
-        addLine(`Format: ${preset.outputFormat}`);
+        addLine(t("Format: {p0}", { p0: preset.outputFormat }));
 
         if (preset.outputFormat !== "NONE") {
             // Only show quality for formats that use it (not AVIF - it uses CRF instead)
             if (preset.outputFormat !== "AVIF") {
-                addLine(`Quality: ${preset.quality}`);
+                addLine(t("Quality: {p0}", { p0: preset.quality }));
             }
             if (preset.outputFormat === "PNG") {
-                addLine(`Color Depth: ${preset.colorDepth}`);
+                addLine(t("Color Depth: {p0}", { p0: preset.colorDepth }));
             }
             if (preset.outputFormat === "AVIF") {
-                addLine(`FFmpeg CRF: ${preset.ffmpegCrf}`);
-                addLine(`FFmpeg Preset: ${preset.ffmpegPreset}`);
+                addLine(t("FFmpeg CRF: {p0}", { p0: preset.ffmpegCrf ?? "" }));
+                addLine(t("FFmpeg Preset: {p0}", { p0: preset.ffmpegPreset ?? "" }));
             }
 
-            addLine(`Resize: ${preset.resizeMode}`);
+            addLine(t("Resize: {p0}", { p0: preset.resizeMode }));
 
             switch (preset.resizeMode) {
                 case "Fit":
                 case "Fill":
-                    addLine(`(${preset.desiredWidth}x${preset.desiredHeight})`);
+                    addLine(t("({p0}x{p1})", { p0: preset.desiredWidth, p1: preset.desiredHeight }));
                     break;
                 case "Width":
-                    addLine(`(Width: ${preset.desiredWidth})`);
+                    addLine(t("(Width: {p0})", { p0: preset.desiredWidth }));
                     break;
                 case "Height":
-                    addLine(`(Height: ${preset.desiredHeight})`);
+                    addLine(t("(Height: {p0})", { p0: preset.desiredHeight }));
                     break;
                 case "LongestEdge":
-                    addLine(`(Longest Edge: ${preset.desiredLongestEdge})`);
+                    addLine(t("(Longest Edge: {p0})", { p0: preset.desiredLongestEdge }));
                     break;
                 case "ShortestEdge":
-                    addLine(`(Shortest Edge: ${preset.desiredLongestEdge})`);
+                    addLine(t("(Shortest Edge: {p0})", { p0: preset.desiredLongestEdge }));
                     break;
                 default: // "None"
                     break;
             }
 
             if (preset.resizeMode !== "None") {
-                addLine(`Enlarge/Reduce: ${preset.enlargeOrReduce}`);
+                addLine(t("Enlarge/Reduce: {p0}", { p0: preset.enlargeOrReduce }));
             }
 
-            addLine(`Allow Larger Files: ${preset.allowLargerFiles ? "Yes" : "No"}`);
+            addLine(t("Allow Larger Files: {p0}", { p0: preset.allowLargerFiles ? "Yes" : "No" }));
         }
 
         if (preset.skipConversionPatterns) {
-            addLine(`Skip Patterns: ${preset.skipConversionPatterns}`);
+            addLine(t("Skip Patterns: {p0}", { p0: preset.skipConversionPatterns }));
         }
         if (preset.revertToOriginalIfLarger) {
-            addLine("Revert to original if larger: Yes");
+            addLine(t("Revert to original if larger: Yes"));
             if (preset.minimumCompressionSavingsInKB !== undefined) {
-                addLine(`Minimum compression savings (KB): ${preset.minimumCompressionSavingsInKB}`);
+                addLine(t("Minimum compression savings (KB): {p0}", { p0: preset.minimumCompressionSavingsInKB }));
             }
         }
 
@@ -3341,19 +3341,19 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 t("Comma-separated list of patterns to skip (glob or regex). Regex patterns must be enclosed in `/` or `r/` or `regex:` E.g. do not process images which include word CAT in them /CAT/")
             )
             .setTooltip(
-                "Supports multiple pattern types:\n\n" +
-                "1. Glob patterns:\n" +
-                "   *.png, draft-*, test-?.jpg\n" +
-                "   * = any characters\n" +
-                "   ? = single character\n\n" +
-                "2. Regular expressions:\n" +
-                "   /pattern/ or r/pattern/ or regex:pattern\n\n" +
-                "Examples:\n" +
-                " *.png (all PNG files)\n" +
-                " draft-* (files starting with draft-)\n" +
-                " /^IMG_\\d{4}\\./ (IMG_ followed by 4 digits)\n" +
-                " r/\\.(jpe?g|png)$/ (files ending in .jpg/.jpeg/.png)\n" +
-                " regex:^(draft|temp)- (files starting with draft- or temp-)"
+                t("Supports multiple pattern types:\n\n") +
+                t("1. Glob patterns:\n") +
+                t("   *.png, draft-*, test-?.jpg\n") +
+                t("   * = any characters\n") +
+                t("   ? = single character\n\n") +
+                t("2. Regular expressions:\n") +
+                t("   /pattern/ or r/pattern/ or regex:pattern\n\n") +
+                t("Examples:\n") +
+                t(" *.png (all PNG files)\n") +
+                t(" draft-* (files starting with draft-)\n") +
+                t(" /^IMG_\\d{4}\\./ (IMG_ followed by 4 digits)\n") +
+                t(" r/\\.(jpe?g|png)$/ (files ending in .jpg/.jpeg/.png)\n") +
+                t(" regex:^(draft|temp)- (files starting with draft- or temp-)")
             )
             .addTextArea((text) => {
                 const value = property === 'skipConversionPatterns'
@@ -3397,52 +3397,52 @@ export class ImageConverterSettingTab extends PluginSettingTab {
 
         switch (preset.resizeDimension) {
             case "none":
-                addLine("No resizing");
+                addLine(t("No resizing"));
                 break;
             case "width":
-                addLine(`Width: ${widthValue}`);
-                addLine(`Scale Mode: ${scaleModeValue}`);
-                addLine(`Respect Editor Max Width: ${respectEditorMaxWidthValue}`);
-                addLine(`Maintain Aspect Ratio: ${maintainAspectRatioValue}`);
+                addLine(t("Width: {p0}", { p0: widthValue }));
+                addLine(t("Scale Mode: {p0}", { p0: scaleModeValue }));
+                addLine(t("Respect Editor Max Width: {p0}", { p0: respectEditorMaxWidthValue }));
+                addLine(t("Maintain Aspect Ratio: {p0}", { p0: maintainAspectRatioValue }));
                 break;
             case "height":
-                addLine(`Height: ${heightValue}`);
-                addLine(`Scale Mode: ${scaleModeValue}`);
-                addLine(`Respect Editor Max Width: ${respectEditorMaxWidthValue}`);
-                addLine(`Maintain Aspect Ratio: ${maintainAspectRatioValue}`);
+                addLine(t("Height: {p0}", { p0: heightValue }));
+                addLine(t("Scale Mode: {p0}", { p0: scaleModeValue }));
+                addLine(t("Respect Editor Max Width: {p0}", { p0: respectEditorMaxWidthValue }));
+                addLine(t("Maintain Aspect Ratio: {p0}", { p0: maintainAspectRatioValue }));
                 break;
             case "both":
-                addLine(`Custom: ${customValue}`);
-                addLine(`Scale Mode: ${scaleModeValue}`);
-                addLine(`Respect Editor Max Width: ${respectEditorMaxWidthValue}`);
-                addLine(`Maintain Aspect Ratio: ${maintainAspectRatioValue}`);
+                addLine(t("Custom: {p0}", { p0: customValue ?? "" }));
+                addLine(t("Scale Mode: {p0}", { p0: scaleModeValue }));
+                addLine(t("Respect Editor Max Width: {p0}", { p0: respectEditorMaxWidthValue }));
+                addLine(t("Maintain Aspect Ratio: {p0}", { p0: maintainAspectRatioValue }));
                 break;
             case "longest-edge":
-                addLine(`Longest Edge: ${longestEdgeValue}`);
-                addLine(`Scale Mode: ${scaleModeValue}`);
-                addLine(`Respect Editor Max Width: ${respectEditorMaxWidthValue}`);
-                addLine(`Maintain Aspect Ratio: ${maintainAspectRatioValue}`);
+                addLine(t("Longest Edge: {p0}", { p0: longestEdgeValue }));
+                addLine(t("Scale Mode: {p0}", { p0: scaleModeValue }));
+                addLine(t("Respect Editor Max Width: {p0}", { p0: respectEditorMaxWidthValue }));
+                addLine(t("Maintain Aspect Ratio: {p0}", { p0: maintainAspectRatioValue }));
                 break;
             case "shortest-edge":
-                addLine(`Shortest Edge: ${shortestEdgeValue}`);
-                addLine(`Scale Mode: ${scaleModeValue}`);
-                addLine(`Respect Editor Max Width: ${respectEditorMaxWidthValue}`);
-                addLine(`Maintain Aspect Ratio: ${maintainAspectRatioValue}`);
+                addLine(t("Shortest Edge: {p0}", { p0: shortestEdgeValue }));
+                addLine(t("Scale Mode: {p0}", { p0: scaleModeValue }));
+                addLine(t("Respect Editor Max Width: {p0}", { p0: respectEditorMaxWidthValue }));
+                addLine(t("Maintain Aspect Ratio: {p0}", { p0: maintainAspectRatioValue }));
                 break;
             case "original-width":
-                addLine("Original Width");
-                addLine(`Scale Mode: ${scaleModeValue}`);
-                addLine(`Respect Editor Max Width: ${respectEditorMaxWidthValue}`);
+                addLine(t("Original Width"));
+                addLine(t("Scale Mode: {p0}", { p0: scaleModeValue }));
+                addLine(t("Respect Editor Max Width: {p0}", { p0: respectEditorMaxWidthValue }));
                 break;
             case "original-height":
-                addLine("Original Height");
-                addLine(`Scale Mode: ${scaleModeValue}`);
-                addLine(`Respect Editor Max Width: ${respectEditorMaxWidthValue}`);
+                addLine(t("Original Height"));
+                addLine(t("Scale Mode: {p0}", { p0: scaleModeValue }));
+                addLine(t("Respect Editor Max Width: {p0}", { p0: respectEditorMaxWidthValue }));
                 break;
             case "editor-max-width":
-                addLine(`Editor Max Width: ${editorMaxWidthValue}`);
-                addLine(`Scale Mode: ${scaleModeValue}`);
-                addLine(`Respect Editor Max Width: ${respectEditorMaxWidthValue}`);
+                addLine(t("Editor Max Width: {p0}", { p0: editorMaxWidthValue }));
+                addLine(t("Scale Mode: {p0}", { p0: scaleModeValue }));
+                addLine(t("Respect Editor Max Width: {p0}", { p0: respectEditorMaxWidthValue }));
                 break;
         }
 
@@ -3457,15 +3457,15 @@ export class ImageConverterSettingTab extends PluginSettingTab {
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
-                        "none": "None",
-                        "width": "Width",
-                        "height": "Height",
-                        "both": "WidthxHeight (Custom)",
-                        ["longest-edge"]: "Longest edge",
-                        ["shortest-edge"]: "Shortest edge",
-                        ["original-width"]: "Apply original image width",
-                        ["original-height"]: "Apply original image height",
-                        ["editor-max-width"]: "Fit editor max-width"
+                        "none": t("None"),
+                        "width": t("Width"),
+                        "height": t("Height"),
+                        "both": t("WidthxHeight (Custom)"),
+                        ["longest-edge"]: t("Longest edge"),
+                        ["shortest-edge"]: t("Shortest edge"),
+                        ["original-width"]: t("Apply original image width"),
+                        ["original-height"]: t("Apply original image height"),
+                        ["editor-max-width"]: t("Fit editor max-width")
                     })
                     .setValue(preset.resizeDimension)
                     .onChange((value: ResizeDimension) => {
@@ -3521,8 +3521,8 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 newSetting.addDropdown((dropdown) => {
                     dropdown
                         .addOptions({
-                            pixels: "px",
-                            percentage: "%",
+                            pixels: t("px"),
+                            percentage: t("%"),
                         })
                         .setValue(preset.resizeUnits)
                         .onChange((value: ResizeUnits) => {
@@ -3583,7 +3583,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 break;
             case "longest-edge":
                 addInputSetting(
-                    "Longest edge",
+                    t("Longest edge"),
                     "image-converter-resize-longest-edge-setting",
                     preset.longestEdge,
                     (value) => {
@@ -3598,7 +3598,7 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 break;
             case "shortest-edge":
                 addInputSetting(
-                    "Shortest edge",
+                    t("Shortest edge"),
                     "image-converter-resize-shortest-edge-setting",
                     preset.shortestEdge,
                     (value) => {
@@ -3676,8 +3676,8 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                     .addDropdown((dropdown) => {
                         dropdown
                             .addOptions({
-                                pixels: "px",
-                                percentage: "%",
+                                pixels: t("px"),
+                                percentage: t("%"),
                             })
                             .setValue(preset.resizeUnits)
                             .onChange((value: ResizeUnits) => {
@@ -3764,9 +3764,9 @@ export class ImageConverterSettingTab extends PluginSettingTab {
                 .addDropdown((dropdown) => {
                     dropdown
                         .addOptions({
-                            auto: "Auto",
-                            reduce: "Reduce Only",
-                            enlarge: "Enlarge Only",
+                            auto: t("Auto"),
+                            reduce: t("Reduce Only"),
+                            enlarge: t("Enlarge Only"),
                         })
                         .setValue(preset.resizeScaleMode)
                         .onChange((value: ResizeScaleMode) => {
@@ -4111,65 +4111,65 @@ export class SaveGlobalPresetModal extends Modal {
             if (preset) {
                 const sectionEl = summaryDocument.createElement("div");
                 sectionEl.classList.add("summary-section");
-                sectionEl.appendChild(createSectionTitle(`${presetType} Preset: ${preset.name}`));
+                sectionEl.appendChild(createSectionTitle(t("{p0} Preset: {p1}", { p0: presetType, p1: preset.name })));
 
                 switch (presetType) {
                     case "Folder": {
                         const folderP = preset as FolderPreset;
-                        sectionEl.appendChild(createSummaryItem("Type", folderP.type));
+                        sectionEl.appendChild(createSummaryItem(t("Type"), folderP.type));
                         if (folderP.type === "SUBFOLDER") {
-                            sectionEl.appendChild(createSummaryItem("Subfolder template", this.plugin.settings.subfolderTemplate));
+                            sectionEl.appendChild(createSummaryItem(t("Subfolder template"), this.plugin.settings.subfolderTemplate));
                         } else if (folderP.type === "CUSTOM") {
-                            sectionEl.appendChild(createSummaryItem("Custom template", folderP.customTemplate));
+                            sectionEl.appendChild(createSummaryItem(t("Custom template"), folderP.customTemplate));
                         }
                         break;
                     }
                     case "Filename": {
                         const filenameP = preset as FilenamePreset;
-                        sectionEl.appendChild(createSummaryItem("Template", filenameP.customTemplate));
+                        sectionEl.appendChild(createSummaryItem(t("Template"), filenameP.customTemplate));
                         break;
                     }
                     case "Conversion": {
                         const conversionP = preset as ConversionPreset;
-                        sectionEl.appendChild(createSummaryItem("Output format", conversionP.outputFormat));
+                        sectionEl.appendChild(createSummaryItem(t("Output format"), conversionP.outputFormat));
                         if (conversionP.outputFormat !== "NONE") {
-                            sectionEl.appendChild(createSummaryItem("Quality", conversionP.quality));
+                            sectionEl.appendChild(createSummaryItem(t("Quality"), conversionP.quality));
                             if (conversionP.outputFormat === "PNG") {
-                                sectionEl.appendChild(createSummaryItem("Color depth", conversionP.colorDepth));
+                                sectionEl.appendChild(createSummaryItem(t("Color depth"), conversionP.colorDepth));
                             }
-                            sectionEl.appendChild(createSummaryItem("Resize mode", conversionP.resizeMode));
+                            sectionEl.appendChild(createSummaryItem(t("Resize mode"), conversionP.resizeMode));
                             switch (conversionP.resizeMode) {
                                 case "Fit":
                                 case "Fill":
-                                    sectionEl.appendChild(createSummaryItem("Dimensions", `${conversionP.desiredWidth}x${conversionP.desiredHeight}`));
+                                    sectionEl.appendChild(createSummaryItem(t("Dimensions"), `${conversionP.desiredWidth}x${conversionP.desiredHeight}`));
                                     break;
                                 case "Width":
-                                    sectionEl.appendChild(createSummaryItem("Width", conversionP.desiredWidth));
+                                    sectionEl.appendChild(createSummaryItem(t("Width"), conversionP.desiredWidth));
                                     break;
                                 case "Height":
-                                    sectionEl.appendChild(createSummaryItem("Height", conversionP.desiredHeight));
+                                    sectionEl.appendChild(createSummaryItem(t("Height"), conversionP.desiredHeight));
                                     break;
                                 case "LongestEdge":
                                 case "ShortestEdge":
-                                    sectionEl.appendChild(createSummaryItem("Edge", conversionP.desiredLongestEdge));
+                                    sectionEl.appendChild(createSummaryItem(t("Edge"), conversionP.desiredLongestEdge));
                                     break;
                             }
                             if (conversionP.resizeMode !== "None") {
-                                sectionEl.appendChild(createSummaryItem("Scale", conversionP.enlargeOrReduce));
+                                sectionEl.appendChild(createSummaryItem(t("Scale"), conversionP.enlargeOrReduce));
                             }
-                            sectionEl.appendChild(createSummaryItem("Allow larger files", conversionP.allowLargerFiles ? "Yes" : "No"));
+                            sectionEl.appendChild(createSummaryItem(t("Allow larger files"), conversionP.allowLargerFiles ? "Yes" : "No"));
                             if (conversionP.revertToOriginalIfLarger) {
-                                sectionEl.appendChild(createSummaryItem("Revert to original if larger", "Yes"));
-                                sectionEl.appendChild(createSummaryItem("Minimum compression savings (KB)", conversionP.minimumCompressionSavingsInKB));
+                                sectionEl.appendChild(createSummaryItem(t("Revert to original if larger"), "Yes"));
+                                sectionEl.appendChild(createSummaryItem(t("Minimum compression savings (KB)"), conversionP.minimumCompressionSavingsInKB));
                             }
-                            sectionEl.appendChild(createSummaryItem("Skip patterns", conversionP.skipConversionPatterns));
+                            sectionEl.appendChild(createSummaryItem(t("Skip patterns"), conversionP.skipConversionPatterns));
                         }
                         break;
                     }
                     case "Link format": {
                         const linkP = preset as LinkFormatPreset;
-                        sectionEl.appendChild(createSummaryItem("Link type", linkP.linkFormat));
-                        sectionEl.appendChild(createSummaryItem("Path format", linkP.pathFormat));
+                        sectionEl.appendChild(createSummaryItem(t("Link type"), linkP.linkFormat));
+                        sectionEl.appendChild(createSummaryItem(t("Path format"), linkP.pathFormat));
                         break;
                     }
                     case "Resize":
@@ -4177,41 +4177,41 @@ export class SaveGlobalPresetModal extends Modal {
                             let resizeDimensionSummary = "";
                             switch (resizePreset.resizeDimension) {
                                 case "width":
-                                    resizeDimensionSummary = `Width: ${resizePreset.width}${resizePreset.resizeUnits === "percentage" ? "%" : "px"}`;
+                                    resizeDimensionSummary = t("Width: {p0}", { p0: `${resizePreset.width}${resizePreset.resizeUnits === "percentage" ? "%" : "px"}` });
                                     break;
                                 case "height":
-                                    resizeDimensionSummary = `Height: ${resizePreset.height}${resizePreset.resizeUnits === "percentage" ? "%" : "px"}`;
+                                    resizeDimensionSummary = t("Height: {p0}", { p0: `${resizePreset.height}${resizePreset.resizeUnits === "percentage" ? "%" : "px"}` });
                                     break;
                                 case "both":
-                                    resizeDimensionSummary = `Custom: ${resizePreset.customValue}`;
+                                    resizeDimensionSummary = t("Custom: {p0}", { p0: resizePreset.customValue ?? "" });
                                     break;
                                 case "longest-edge":
-                                    resizeDimensionSummary = `Longest edge: ${resizePreset.longestEdge}${resizePreset.resizeUnits === "percentage" ? "%" : "px"}`;
+                                    resizeDimensionSummary = t("Longest edge: {p0}", { p0: `${resizePreset.longestEdge}${resizePreset.resizeUnits === "percentage" ? "%" : "px"}` });
                                     break;
                                 case "shortest-edge":
-                                    resizeDimensionSummary = `Shortest edge: ${resizePreset.shortestEdge}${resizePreset.resizeUnits === "percentage" ? "%" : "px"}`;
+                                    resizeDimensionSummary = t("Shortest edge: {p0}", { p0: `${resizePreset.shortestEdge}${resizePreset.resizeUnits === "percentage" ? "%" : "px"}` });
                                     break;
                                 case "original-width":
-                                    resizeDimensionSummary = "Original width";
+                                    resizeDimensionSummary = t("Original width");
                                     break;
                                 case "original-height":
-                                    resizeDimensionSummary = "Original height";
+                                    resizeDimensionSummary = t("Original height");
                                     break;
                                 case "editor-max-width":
-                                    resizeDimensionSummary = `Editor max width: ${resizePreset.editorMaxWidthValue}${resizePreset.resizeUnits === "percentage" ? "%" : "px"}`;
+                                    resizeDimensionSummary = t("Editor max width: {p0}", { p0: `${resizePreset.editorMaxWidthValue}${resizePreset.resizeUnits === "percentage" ? "%" : "px"}` });
                                     break;
                                 case "none":
-                                    resizeDimensionSummary = "No resizing";
+                                    resizeDimensionSummary = t("No resizing");
                                     break;
                             }
-                            sectionEl.appendChild(createSummaryItem("Dimension", resizeDimensionSummary));
+                            sectionEl.appendChild(createSummaryItem(t("Dimension"), resizeDimensionSummary));
 
                             // Add scale mode, respect editor max width, and maintain aspect ratio
                             if (resizePreset.resizeDimension !== "none") {
-                                sectionEl.appendChild(createSummaryItem("Scale mode", resizePreset.resizeScaleMode));
-                                sectionEl.appendChild(createSummaryItem("Respect editor max width", resizePreset.respectEditorMaxWidth ? "Yes" : "No"));
+                                sectionEl.appendChild(createSummaryItem(t("Scale mode"), resizePreset.resizeScaleMode));
+                                sectionEl.appendChild(createSummaryItem(t("Respect editor max width"), resizePreset.respectEditorMaxWidth ? "Yes" : "No"));
                                 if (resizePreset.resizeDimension !== "original-width" && resizePreset.resizeDimension !== "original-height" && resizePreset.resizeDimension !== "editor-max-width") {
-                                    sectionEl.appendChild(createSummaryItem("Maintain aspect ratio", resizePreset.maintainAspectRatio ? "Yes" : "No"));
+                                    sectionEl.appendChild(createSummaryItem(t("Maintain aspect ratio"), resizePreset.maintainAspectRatio ? "Yes" : "No"));
                                 }
                             }
                         } // end of if (resizePreset) check
@@ -4225,7 +4225,7 @@ export class SaveGlobalPresetModal extends Modal {
         addPresetSummary("Folder", folderPreset);
         addPresetSummary("Filename", filenamePreset);
         addPresetSummary("Conversion", conversionPreset);
-        addPresetSummary("Link format", linkFormatPreset);
+        addPresetSummary(t("Link format"), linkFormatPreset);
         addPresetSummary("Resize", resizePreset);
 
         // Append the fragment to the summary container

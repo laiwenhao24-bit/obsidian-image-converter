@@ -101,9 +101,9 @@ export class ProcessAllVaultModal extends Modal {
                 dropdown
                     .addOption("disabled", t("Same as original"))
                     .addOptions({
-                        webp: "WebP",
-                        jpg: "JPG",
-                        png: "PNG",
+                        webp: t("WebP"),
+                        jpg: t("JPG"),
+                        png: t("PNG"),
                     })
                     .setValue(this.plugin.settings.ProcessAllVaultconvertTo)
                     .onChange(async (value) => {
@@ -154,13 +154,13 @@ export class ProcessAllVaultModal extends Modal {
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
-                        None: "None",
-                        Fit: "Fit",
-                        Fill: "Fill",
-                        LongestEdge: "Longest edge",
-                        ShortestEdge: "Shortest edge",
-                        Width: "Width",
-                        Height: "Height",
+                        None: t("None"),
+                        Fit: t("Fit"),
+                        Fill: t("Fill"),
+                        LongestEdge: t("Longest edge"),
+                        ShortestEdge: t("Shortest edge"),
+                        Width: t("Width"),
+                        Height: t("Height"),
                     })
                     .setValue(
                         this.plugin.settings
@@ -280,9 +280,9 @@ export class ProcessAllVaultModal extends Modal {
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
-                        Always: "Reduce and enlarge",
-                        Reduce: "Reduce only",
-                        Enlarge: "Enlarge only",
+                        Always: t("Reduce and enlarge"),
+                        Reduce: t("Reduce only"),
+                        Enlarge: t("Enlarge only"),
                     })
                     .setValue(
                         this.plugin.settings.ProcessAllVaultEnlargeOrReduce

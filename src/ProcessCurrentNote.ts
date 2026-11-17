@@ -120,10 +120,10 @@ export class ProcessCurrentNote extends Modal {
 			.addDropdown((dropdown) =>
 				dropdown
 					.addOptions({
-						disabled: "Same as original",
-						webp: "WebP",
-						jpg: "JPG",
-						png: "PNG",
+						disabled: t("Same as original"),
+						webp: t("WebP"),
+						jpg: t("JPG"),
+						png: t("PNG"),
 					})
 					.setValue(this.plugin.settings.ProcessCurrentNoteconvertTo)
 					.onChange(async (value) => {
@@ -181,13 +181,13 @@ export class ProcessCurrentNote extends Modal {
 			.addDropdown((dropdown) =>
 				dropdown
 					.addOptions({
-						None: "None",
-						LongestEdge: "Longest edge",
-						ShortestEdge: "Shortest edge",
-						Width: "Width",
-						Height: "Height",
-						Fit: "Fit",
-						Fill: "Fill",
+						None: t("None"),
+						LongestEdge: t("Longest edge"),
+						ShortestEdge: t("Shortest edge"),
+						Width: t("Width"),
+						Height: t("Height"),
+						Fit: t("Fit"),
+						Fill: t("Fill"),
 					})
 					.setValue(
 						this.plugin.settings
@@ -429,9 +429,9 @@ export class ProcessCurrentNote extends Modal {
             .addDropdown((dropdown) => {
                 dropdown
                     .addOptions({
-                        Always: 'Reduce and enlarge',
-                        Reduce: 'Reduce only',
-                        Enlarge: 'Enlarge only',
+                        Always: t("Reduce and enlarge"),
+                        Reduce: t("Reduce only"),
+                        Enlarge: t("Enlarge only"),
                     })
                     .setValue(this.plugin.settings.ProcessCurrentNoteEnlargeOrReduce)
                     .onChange(async (value: 'Always' | 'Reduce' | 'Enlarge') => {

@@ -191,7 +191,7 @@ export class ProcessSingleImageModal extends Modal {
         if (this.modalSettings.outputFormat === "PNGQUANT") {
             new Setting(this.conversionSettingsContainer)
                 .setName(t("Executable path for pngquant"))
-                .then((setting) => addInfoIcon(setting, "Provide full-path to the binary file. It can be inside vault or anywhere in your file system."))
+                .then((setting) => addInfoIcon(setting, t("Provide full-path to the binary file. It can be inside vault or anywhere in your file system.")))
                 .addText(text => {
                     text.setValue(this.modalSettings.pngquantExecutablePath)
                         .onChange(async value => {
@@ -206,7 +206,7 @@ export class ProcessSingleImageModal extends Modal {
 
             new Setting(this.conversionSettingsContainer)
                 .setName(t("Quality min-max range"))
-                .then((setting) => addInfoIcon(setting, "Instructs pngquant to use the least amount of colors required to meet or exceed the max quality. min and max are numbers in range 0 (worst) to 100 (perfect)."))
+                .then((setting) => addInfoIcon(setting, t("Instructs pngquant to use the least amount of colors required to meet or exceed the max quality. min and max are numbers in range 0 (worst) to 100 (perfect).")))
                 .addText(text => {
                     text.setValue(this.modalSettings.pngquantQuality)
                         .onChange(async value => {
@@ -346,7 +346,7 @@ export class ProcessSingleImageModal extends Modal {
             new Setting(this.conversionSettingsContainer)
                 // eslint-disable-next-line obsidianmd/ui/sentence-case
                 .setName(t("FFmpeg executable path"))
-                .then((setting) => addInfoIcon(setting, "Provide full-path to the binary file. It can be inside vault or anywhere in your file system."))
+                .then((setting) => addInfoIcon(setting, t("Provide full-path to the binary file. It can be inside vault or anywhere in your file system.")))
                 .addButton(button => {
                     button
                         .setIcon("search")
